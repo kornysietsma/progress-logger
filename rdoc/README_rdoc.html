@@ -6,7 +6,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>File: README.rdoc [progress-logger 0.1.0
+	<title>File: README.rdoc [progress-logger 1.0.0
 ]</title>
 
 	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
@@ -74,7 +74,12 @@
 	</div>
 
 	<div id="documentation">
-		<h1>progress-logger</h1>
+		<p>
+(Full rdocs are hosted on github at <a
+href="http://kornysietsma.github.com/progress-logger/rdoc/index.html">kornysietsma.github.com/progress-logger/rdoc/index.html</a>
+)
+</p>
+<hr style="height: 1px"></hr><h1><a href="ProgressLogger.html">ProgressLogger</a></h1>
 <p>
 This is a very simple gem to make it easier to log the state of long slow
 processing jobs. I tend to do this sort of thing over and over and over:
@@ -91,12 +96,14 @@ processing jobs. I tend to do this sort of thing over and over and over:
 </pre>
 <p>
 with variations for timed reporting, calculating processing rate, and so
-on. the <a href="ProgressLogger.html">ProgressLogger</a> gem doesn&#8217;t
+on. <a href="ProgressLogger.html">ProgressLogger</a> really doesn&#8217;t
 do much - it just tries to handle the interval checking, leaving what you
 do every million records (or whatever) entirely up to you.  The example
 above can be run as:
 </p>
 <pre>
+    require 'progress-logger'
+
     p = ProgressLogger.new(:count =&gt; 1000000) do |state|
       puts &quot;Processed #{state.count} rows&quot;
     end
@@ -114,10 +121,6 @@ example to whet your appetite:
     p = ProgressLogger.new(:count =&gt; 1000000, :minutes =&gt; 30, :max =&gt; @collection.size) do |state|
       @logger.info(&quot;Processed #{state.count} rows - #{state.long_eta/(60*60)} hours to go!&quot;)
       @cache.flush()
-    end
-    @collection.find_all.each do |record|
-      p.trigger
-      # do stuff
     end
 </pre>
 <p>
