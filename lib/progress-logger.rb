@@ -5,17 +5,64 @@
 
 # The ProgressLogger class is the workhorse of this gem - it is used to wrap your logging code (or whatever you are doing)
 # you construct it with a set of criteria for when it should log, and a block to do the actual logging (or other activity):
-# <tt> p = ProgressLogger.new(:count => 100000, :minutes => 30) do |state|
-#     puts "processed #{state.count} rows"
-# end</tt>
+# <tt>
+#    p = ProgressLogger.new(:step => 100000) do |state|
+#       puts "processed #{state.count} rows"
+#    end
+# </tt>
 # and then every time "p.trigger()" is called:
 # * p.count is incremented
-# * if p.count is a multiple of 100000, or 30 minutes have passed since the last time-based tick
-# ** the block is called, with a 'state' object as a parameter
+# * if p.count is a multiple of 100000 the block is called, with a 'state' object as a parameter
 #
 # You can do pretty well anything you want in the passed block - log something, flush a database, update a gui, whatever.
 #
 # See the ProgressLogger::State class for what you can get from the state object
+#
+# == Examples
+#
+# ==== Log every 5 minutes:
+# <tt>
+#    p = ProgressLogger.new(:minutes => 5) do |state|
+#       puts "processed #{state.count} rows"
+#    end
+# </tt>
+#
+# ==== Log every hour, or after a million triggers, with a detailed message and some extra work
+# <tt>
+#    max = @collection.size
+#    p = ProgressLogger.new(:hours => 1, :step => 1000000, :max => max) do |state|
+#       @logger.info "processed #{state.count} rows"
+#       @logger.info "  Current processing rate of #{state.short_rate} rows/sec implies ending in #{state.short_eta/(3600)} hours"
+#       @logger.info "  Long-term processing rate of #{state.long_rate} rows/sec implies ending in #{state.long_eta/(3600)} hours"
+#       @logger.debug "flushing cache"
+#       @cache.flush
+#    end
+#    @collection.find().each do |row|
+#      p.trigger
+#      process(row)
+#    end
+#    @logger.info "done - processed #{p.count} rows in total"
+# </tt>
+#
+# ==== Passing the ProgressLogger around
+#
+# <tt>
+#    parent_count = 0
+#    plogger = ProgressLogger.new(:minutes => 5) do |state|
+#       puts "processed #{parent_count} parents, #{state.count} children"
+#    end
+#    @parents.each do |parent|
+#      parent_count += 1
+#      process_children(parent, plogger)
+#    end
+#  end
+#  def process_children(parent, plogger)
+#    parent.children.each do |child|
+#      plogger.trigger
+#      ... do stuff
+#    end
+#  end
+# </tt>
 
 class ProgressLogger
 
@@ -67,7 +114,7 @@ class ProgressLogger
       return (@max - @count) / rate
     end
     private
-    def initialize(count, start_count, now, start_time, last_report, last_count, max = nil)
+    def initialize(count, start_count, now, start_time, last_report, last_count, max = nil) #:notnew:
       @count = count
       @start_count = start_count
       @now = now
@@ -85,7 +132,7 @@ class ProgressLogger
   # parameters:
   # * :step - the passed block is called after this many calls to trigger()
   # * :seconds, :minutes, :hours - the passed block is called after this number of seconds/minutes/hours
-  # ** you can specify more than one of these, they'll just get added together
+  # * * you can specify more than one of these, they'll just get added together
   # * :max - this is an expected maximum number of triggers - it's used to calculate eta values for the ProgressLogger::State object
   # * block - you must pass a block, it is called (with a state parameter) when the above criteria are met
 
@@ -119,9 +166,9 @@ class ProgressLogger
   # normally timers are initialized on the first call to trigger() - this is because quite often, a processing loop
   # like the following has a big startup time as cursors are allocated etc:
   # <tt>
-  # p = ProgressLogger.new ...
-  # @db.find({:widget => true).each do  # this takes 5 minutes to cache cursors!
-  #   p.trigger
+  #   p = ProgressLogger.new ...
+  #   @db.find({:widget => true).each do  # this takes 5 minutes to cache cursors!
+  #     p.trigger
   # </tt>
   # If the timers were initialized when ProgressLogger.new was called, they'd be messed up by the loop start time.
   # If for some reason you want the timers to be manually started earlier, you can explicitly call start,
