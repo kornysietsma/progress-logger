@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: README.rdoc [progress-logger 0.1.0
+]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./ProgressLogger.html">ProgressLogger</a></li>
+				
+					<li><a href="./ProgressLogger/State.html">ProgressLogger::State</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1>progress-logger</h1>
+<p>
+This is a very simple gem to make it easier to log the state of long slow
+processing jobs. I tend to do this sort of thing over and over and over:
+</p>
+<pre>
+    count = 0
+    @collection.each do |record|
+      count += 1
+      if count % 1000000 == 0
+        puts &quot;Processed #{count} rows&quot;
+      end
+      # do stuff
+    end
+</pre>
+<p>
+with variations for timed reporting, calculating processing rate, and so
+on. the <a href="ProgressLogger.html">ProgressLogger</a> gem doesn&#8217;t
+do much - it just tries to handle the interval checking, leaving what you
+do every million records (or whatever) entirely up to you.  The example
+above can be run as:
+</p>
+<pre>
+    p = ProgressLogger.new(:count =&gt; 1000000) do |state|
+      puts &quot;Processed #{state.count} rows&quot;
+    end
+    @collection.each do |record|
+      p.trigger
+      # do stuff
+    end
+</pre>
+<p>
+You can do lots of other stuff too - see the <a
+href="ProgressLogger.html">ProgressLogger</a> rdocs for more, but an
+example to whet your appetite:
+</p>
+<pre>
+    p = ProgressLogger.new(:count =&gt; 1000000, :minutes =&gt; 30, :max =&gt; @collection.size) do |state|
+      @logger.info(&quot;Processed #{state.count} rows - #{state.long_eta/(60*60)} hours to go!&quot;)
+      @cache.flush()
+    end
+    @collection.find_all.each do |record|
+      p.trigger
+      # do stuff
+    end
+</pre>
+<p>
+More examples are in the <a href="ProgressLogger.html">ProgressLogger</a>
+docs - or take a look at the specs!
+</p>
+<h2>Note on Patches/Pull Requests</h2>
+<pre>
+ 
+</pre>
+<ul>
+<li><p>
+Fork the project.
+</p>
+</li>
+<li><p>
+Make your feature addition or bug fix.
+</p>
+</li>
+<li><p>
+Add tests for it. This is important so I don&#8217;t break it in a future
+version unintentionally.
+</p>
+</li>
+<li><p>
+Commit, do not mess with rakefile, version, or history. (if you want to
+have your own version, that is fine but bump version in a commit by itself
+I can ignore when I pull)
+</p>
+</li>
+<li><p>
+Send me a pull request. Bonus points for topic branches.
+</p>
+</li>
+</ul>
+<h2>Copyright</h2>
+<p>
+Copyright &#169; 2010 Kornelis Sietsma. See LICENSE for details.
+</p>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+

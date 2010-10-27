@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: ProgressLogger::State</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/progress-logger_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/progress-logger.rb">lib/progress-logger.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-count_delta">#count_delta</a></li>
+					
+					<li><a href="#method-i-initialize">#initialize</a></li>
+					
+					<li><a href="#method-i-long_eta">#long_eta</a></li>
+					
+					<li><a href="#method-i-long_rate">#long_rate</a></li>
+					
+					<li><a href="#method-i-short_eta">#short_eta</a></li>
+					
+					<li><a href="#method-i-short_rate">#short_rate</a></li>
+					
+					<li><a href="#method-i-time_delta">#time_delta</a></li>
+					
+					<li><a href="#method-i-time_total">#time_total</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../ProgressLogger.html">ProgressLogger</a></li>
+				
+					<li><a href="../ProgressLogger/State.html">ProgressLogger::State</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">ProgressLogger::State</h1>
+
+		<div id="description">
+			<p>
+Internal state passed to the <a
+href="../ProgressLogger.html">ProgressLogger</a> block whenever the
+criteria are met. count is the current count of triggers processed now is
+the Time.now value when this action was triggered (useful if you are
+handling state slowly)
+</p>
+
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+		<div id="attribute-method-details" class="method-section section">
+			<h3 class="section-header">Attributes</h3>
+
+			
+			<div id="count-attribute-method" class="method-detail">
+				<a name="count"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">count</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				
+				
+				</div>
+			</div>
+			
+			<div id="now-attribute-method" class="method-detail">
+				<a name="now"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">now</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				
+				
+				</div>
+			</div>
+			
+		</div>
+		
+
+		<!-- Methods -->
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="count-delta-method" class="method-detail ">
+				<a name="method-i-count_delta"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">count_delta</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+the number of triggers processed since the last action
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="count-delta-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 75</span>
+75:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">count_delta</span>
+76:       <span class="ruby-ivar">@count</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@last_count</span>
+77:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="long-eta-method" class="method-detail ">
+				<a name="method-i-long_eta"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">long_eta</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+the estimated time to complete, based on the long-term speed (<a
+href="State.html#method-i-long_rate">long_rate</a>)
+</p>
+<ul>
+<li><p>
+raises ArgumentError if you don&#8217;t have a :max parameter in the main
+<a href="../ProgressLogger.html">ProgressLogger</a> constructor
+</p>
+</li>
+<li><p>
+will return nil if this is called on the very first call to trigger, as no
+time will have elapsed!
+</p>
+</li>
+</ul>
+					
+
+					
+					<div class="method-source-code"
+						id="long-eta-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 110</span>
+110:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">long_eta</span>
+111:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;Can't calculate ETA when no max specified&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@max</span>.<span class="ruby-identifier">nil?</span>
+112:       <span class="ruby-identifier">rate</span> = <span class="ruby-identifier">long_rate</span>
+113:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rate</span>.<span class="ruby-identifier">nil?</span>
+114:       <span class="ruby-keyword kw">return</span> (<span class="ruby-ivar">@max</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@count</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">rate</span>
+115:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="long-rate-method" class="method-detail ">
+				<a name="method-i-long_rate"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">long_rate</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+the processing rate, in triggers-per-second, using the count since the
+first action for a long-term speed
+</p>
+<ul>
+<li><p>
+will return nil if this is called on the very first call to trigger, as no
+time will have elapsed!
+</p>
+</li>
+</ul>
+					
+
+					
+					<div class="method-source-code"
+						id="long-rate-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 94</span>
+94:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">long_rate</span>
+95:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@now</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@start_time</span>
+96:       (<span class="ruby-ivar">@count</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start_count</span>) <span class="ruby-operator">/</span> (<span class="ruby-value">1.0</span> * (<span class="ruby-ivar">@now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start_time</span>))
+97:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="short-eta-method" class="method-detail ">
+				<a name="method-i-short_eta"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">short_eta</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+the estimated time to complete, based on the short-term speed (<a
+href="State.html#method-i-short_rate">short_rate</a>)
+</p>
+<ul>
+<li><p>
+raises ArgumentError if you don&#8217;t have a :max parameter in the main
+<a href="../ProgressLogger.html">ProgressLogger</a> constructor
+</p>
+</li>
+<li><p>
+will return nil if this is called on the very first call to trigger, as no
+time will have elapsed!
+</p>
+</li>
+</ul>
+					
+
+					
+					<div class="method-source-code"
+						id="short-eta-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 101</span>
+101:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">short_eta</span>
+102:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;Can't calculate ETA when no max specified&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@max</span>.<span class="ruby-identifier">nil?</span>
+103:       <span class="ruby-identifier">rate</span> = <span class="ruby-identifier">short_rate</span>
+104:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">rate</span>.<span class="ruby-identifier">nil?</span>
+105:       <span class="ruby-keyword kw">return</span> (<span class="ruby-ivar">@max</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@count</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">rate</span>
+106:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="short-rate-method" class="method-detail ">
+				<a name="method-i-short_rate"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">short_rate</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+the processing rate, in triggers-per-second, using the count since the last
+action for a short-term speed
+</p>
+<ul>
+<li><p>
+will return nil if this is called on the very first call to trigger, as no
+time will have elapsed!
+</p>
+</li>
+</ul>
+					
+
+					
+					<div class="method-source-code"
+						id="short-rate-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 88</span>
+88:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">short_rate</span>
+89:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@now</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@last_report</span>
+90:       (<span class="ruby-ivar">@count</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@last_count</span>) <span class="ruby-operator">/</span> (<span class="ruby-value">1.0</span> * (<span class="ruby-ivar">@now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@last_report</span>))
+91:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="time-delta-method" class="method-detail ">
+				<a name="method-i-time_delta"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">time_delta</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+the amount of time passed since the last action
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="time-delta-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 83</span>
+83:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">time_delta</span>
+84:       <span class="ruby-ivar">@now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@last_report</span>
+85:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="time-total-method" class="method-detail ">
+				<a name="method-i-time_total"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">time_total</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+the amount of time passed since the first trigger (or since <a
+href="../ProgressLogger.html#method-i-start">ProgressLogger.start</a> was
+called)
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="time-total-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 79</span>
+79:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">time_total</span>
+80:       <span class="ruby-ivar">@now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start_time</span>
+81:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="protected-instance-method-details" class="method-section section">
+			<h3 class="section-header">Protected Instance Methods</h3>
+
+		
+			<div id="initialize-method" class="method-detail ">
+				<a name="method-i-initialize"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">initialize</span><span
+						class="method-args">(count, start_count, now, start_time, last_report, last_count, max = nil)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="initialize-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 117</span>
+117:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">count</span>, <span class="ruby-identifier">start_count</span>, <span class="ruby-identifier">now</span>, <span class="ruby-identifier">start_time</span>, <span class="ruby-identifier">last_report</span>, <span class="ruby-identifier">last_count</span>, <span class="ruby-identifier">max</span> = <span class="ruby-keyword kw">nil</span>) <span class="ruby-comment cmt">#:notnew:</span>
+118:       <span class="ruby-ivar">@count</span> = <span class="ruby-identifier">count</span>
+119:       <span class="ruby-ivar">@start_count</span> = <span class="ruby-identifier">start_count</span>
+120:       <span class="ruby-ivar">@now</span> = <span class="ruby-identifier">now</span>
+121:       <span class="ruby-ivar">@start_time</span> = <span class="ruby-identifier">start_time</span>
+122:       <span class="ruby-ivar">@last_report</span> = <span class="ruby-identifier">last_report</span>
+123:       <span class="ruby-ivar">@last_count</span> = <span class="ruby-identifier">last_count</span>
+124:       <span class="ruby-ivar">@max</span> = <span class="ruby-identifier">max</span>
+125:     <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

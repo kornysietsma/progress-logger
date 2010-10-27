@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: ProgressLogger</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./lib/progress-logger_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/progress-logger.rb">lib/progress-logger.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+			<div id="namespace-list-section" class="section">
+				<h3 class="section-header">Namespace</h3>
+				<ul class="link-list">
+					
+					<li><span class="type">CLASS</span> <a href="ProgressLogger/State.html">ProgressLogger::State</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-new">::new</a></li>
+					
+					<li><a href="#method-i-run_block">#run_block</a></li>
+					
+					<li><a href="#method-i-start">#start</a></li>
+					
+					<li><a href="#method-i-trigger">#trigger</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./ProgressLogger.html">ProgressLogger</a></li>
+				
+					<li><a href="./ProgressLogger/State.html">ProgressLogger::State</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">ProgressLogger</h1>
+
+		<div id="description">
+			<p>
+The <a href="ProgressLogger.html">ProgressLogger</a> class is the workhorse
+of this gem - it is used to wrap your logging code (or whatever you are
+doing) you construct it with a set of criteria for when it should log, and
+a block to do the actual logging (or other activity): <tt>
+</p>
+<pre>
+   p = ProgressLogger.new(:step =&gt; 100000) do |state|
+      puts &quot;processed #{state.count} rows&quot;
+   end
+</pre>
+<p>
+</tt> and then every time &#8220;p.trigger()&#8221; is called:
+</p>
+<ul>
+<li><p>
+p.count is incremented
+</p>
+</li>
+<li><p>
+if p.count is a multiple of 100000 the block is called, with a
+&#8216;state&#8217; object as a parameter
+</p>
+</li>
+</ul>
+<p>
+You can do pretty well anything you want in the passed block - log
+something, flush a database, update a gui, whatever.
+</p>
+<p>
+See the <a href="ProgressLogger/State.html">ProgressLogger::State</a> class
+for what you can get from the state object
+</p>
+<h2>Examples</h2>
+<h4>Log every 5 minutes:</h4>
+<p>
+<tt>
+</p>
+<pre>
+   p = ProgressLogger.new(:minutes =&gt; 5) do |state|
+      puts &quot;processed #{state.count} rows&quot;
+   end
+</pre>
+<p>
+</tt>
+</p>
+<h4>Log every hour, or after a million triggers, with a detailed message and some extra work</h4>
+<p>
+<tt>
+</p>
+<pre>
+   max = @collection.size
+   p = ProgressLogger.new(:hours =&gt; 1, :step =&gt; 1000000, :max =&gt; max) do |state|
+      @logger.info &quot;processed #{state.count} rows&quot;
+      @logger.info &quot;  Current processing rate of #{state.short_rate} rows/sec implies ending in #{state.short_eta/(3600)} hours&quot;
+      @logger.info &quot;  Long-term processing rate of #{state.long_rate} rows/sec implies ending in #{state.long_eta/(3600)} hours&quot;
+      @logger.debug &quot;flushing cache&quot;
+      @cache.flush
+   end
+   @collection.find().each do |row|
+     p.trigger
+     process(row)
+   end
+   @logger.info &quot;done - processed #{p.count} rows in total&quot;
+</pre>
+<p>
+</tt>
+</p>
+<h4>Passing the <a href="ProgressLogger.html">ProgressLogger</a> around</h4>
+<p>
+<tt>
+</p>
+<pre>
+   parent_count = 0
+   plogger = ProgressLogger.new(:minutes =&gt; 5) do |state|
+      puts &quot;processed #{parent_count} parents, #{state.count} children&quot;
+   end
+   @parents.each do |parent|
+     parent_count += 1
+     process_children(parent, plogger)
+   end
+ end
+ def process_children(parent, plogger)
+   parent.children.each do |child|
+     plogger.trigger
+     ... do stuff
+   end
+ end
+</pre>
+<p>
+</tt>
+</p>
+
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+		<div id="attribute-method-details" class="method-section section">
+			<h3 class="section-header">Attributes</h3>
+
+			
+			<div id="count-attribute-method" class="method-detail">
+				<a name="count"></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">count</span><span
+						class="attribute-access-type">[R]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+count of triggers processed so far
+</p>
+				
+				</div>
+			</div>
+			
+		</div>
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="method-c-new"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">(params = {}, &block)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+create a <a href="ProgressLogger.html">ProgressLogger</a> with specified
+criteria you <b>must</b> specify either a :step or one of :seconds,
+:minutes, and/or :hours parameters:
+</p>
+<ul>
+<li><p>
+:step - the passed block is called after this many calls to trigger()
+</p>
+</li>
+<li><p>
+:seconds, :minutes, :hours - the passed block is called after this number
+of seconds/minutes/hours
+</p>
+</li>
+<li><ul>
+<li><p>
+you can specify more than one of these, they&#8217;ll just get added
+together
+</p>
+</li>
+</ul>
+</li>
+<li><p>
+:max - this is an expected maximum number of triggers - it&#8217;s used to
+calculate eta values for the <a
+href="ProgressLogger/State.html">ProgressLogger::State</a> object
+</p>
+</li>
+<li><p>
+block - you must pass a block, it is called (with a state parameter) when
+the above criteria are met
+</p>
+</li>
+</ul>
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 139</span>
+139:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">params</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+140:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:step</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:seconds</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:minutes</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:hours</span>]
+141:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;You must specify a :step, :seconds, :minutes or :hours interval criterion to ProgressLogger&quot;</span>)
+142:     <span class="ruby-keyword kw">end</span>
+143:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">block_given?</span>
+144:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;You must pass a block to ProgressLogger&quot;</span>)
+145:     <span class="ruby-keyword kw">end</span>
+146:     <span class="ruby-ivar">@stepsize</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:step</span>]
+147:     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;Step size must be greater than 0&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@stepsize</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@stepsize</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+148:     <span class="ruby-ivar">@max</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:max</span>]
+149:     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;Max count must be greater than 0&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@max</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@max</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+150: 
+151:     <span class="ruby-ivar">@count_based</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:step</span>]
+152:     <span class="ruby-ivar">@time_based</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:seconds</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:minutes</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:hours</span>]
+153:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@time_based</span>
+154:       <span class="ruby-ivar">@seconds</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:seconds</span>] <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
+155:       <span class="ruby-ivar">@seconds</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:minutes</span>] * <span class="ruby-value">60</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:minutes</span>]
+156:       <span class="ruby-ivar">@seconds</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:hours</span>] * <span class="ruby-value">60</span> * <span class="ruby-value">60</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:hours</span>]
+157:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;You must specify a total time greater than 0&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@seconds</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+158:     <span class="ruby-keyword kw">end</span>
+159: 
+160:     <span class="ruby-ivar">@count</span> = <span class="ruby-value">0</span>
+161:     <span class="ruby-ivar">@block</span> = <span class="ruby-identifier">block</span>
+162:     <span class="ruby-ivar">@started</span> = <span class="ruby-keyword kw">false</span>  <span class="ruby-comment cmt"># don't start yet - allow for startup time in loops; can start manually with start() below</span>
+163:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="start-method" class="method-detail ">
+				<a name="method-i-start"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">start</span><span
+						class="method-args">(now = Time.now)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+manually start timers normally timers are initialized on the first call to
+trigger() - this is because quite often, a processing loop like the
+following has a big startup time as cursors are allocated etc: <tt>
+</p>
+<pre>
+  p = ProgressLogger.new ...
+  @db.find({:widget =&gt; true).each do  # this takes 5 minutes to cache cursors!
+    p.trigger
+</pre>
+<p>
+</tt> If the timers were initialized when ProgressLogger.new was called,
+they&#8217;d be messed up by the loop start time. If for some reason you
+want the timers to be manually started earlier, you can explicitly call
+start, optionally passing it your own special version of Time.now
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="start-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 176</span>
+176:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>(<span class="ruby-identifier">now</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+177:     <span class="ruby-ivar">@started</span> = <span class="ruby-keyword kw">true</span>
+178:     <span class="ruby-ivar">@start_time</span> = <span class="ruby-identifier">now</span>
+179:     <span class="ruby-ivar">@last_report</span> = <span class="ruby-identifier">now</span>
+180:     <span class="ruby-ivar">@last_timecheck</span> = <span class="ruby-identifier">now</span>  <span class="ruby-comment cmt"># last time interval, so count-based reports don't stop time-based reports</span>
+181:     <span class="ruby-ivar">@start_count</span> = <span class="ruby-ivar">@last_count</span> = <span class="ruby-ivar">@count</span>
+182:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="trigger-method" class="method-detail ">
+				<a name="method-i-trigger"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">trigger</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+trigger whatever regular event you are watching - if the criteria are met,
+this will call your block of code
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="trigger-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 185</span>
+185:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trigger</span>
+186:     <span class="ruby-identifier">start</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@started</span>  <span class="ruby-comment cmt"># note - will set start and last counts to 0, which may be slightly inaccurate!</span>
+187:     <span class="ruby-ivar">@count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+188:     <span class="ruby-identifier">now</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+189:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@time_based</span>
+190:       <span class="ruby-identifier">time_delta</span> = <span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@last_timecheck</span>
+191:       <span class="ruby-identifier">its_time</span> = (<span class="ruby-identifier">time_delta</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@seconds</span>)
+192:     <span class="ruby-keyword kw">else</span>
+193:       <span class="ruby-identifier">its_time</span> = <span class="ruby-keyword kw">false</span>
+194:     <span class="ruby-keyword kw">end</span>
+195:     <span class="ruby-identifier">its_enough</span> = <span class="ruby-ivar">@count_based</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-ivar">@count</span> <span class="ruby-operator">%</span> <span class="ruby-ivar">@stepsize</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
+196:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">its_time</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">its_enough</span>
+197:       <span class="ruby-identifier">run_block</span> <span class="ruby-identifier">now</span>
+198:       <span class="ruby-ivar">@last_report</span> = <span class="ruby-identifier">now</span>
+199:       <span class="ruby-ivar">@last_count</span> = <span class="ruby-ivar">@count</span>
+200:       <span class="ruby-ivar">@last_timecheck</span> = <span class="ruby-identifier">now</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">its_time</span>
+201:     <span class="ruby-keyword kw">end</span>
+202:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="run-block-method" class="method-detail ">
+				<a name="method-i-run_block"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">run_block</span><span
+						class="method-args">(now)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="run-block-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/progress-logger.rb, line 206</span>
+206:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_block</span>(<span class="ruby-identifier">now</span>)
+207:     <span class="ruby-ivar">@block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-constant">State</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@count</span>, <span class="ruby-ivar">@start_count</span>, <span class="ruby-identifier">now</span>, <span class="ruby-ivar">@start_time</span>, <span class="ruby-ivar">@last_report</span>, <span class="ruby-ivar">@last_count</span>, <span class="ruby-ivar">@max</span>))
+208:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
