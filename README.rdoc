@@ -1,5 +1,6 @@
-= progress-logger
-
+(Full rdocs are hosted on github at http://kornysietsma.github.com/progress-logger/rdoc/index.html )
+---
+= ProgressLogger
 This is a very simple gem to make it easier to log the state of long slow processing jobs.
 I tend to do this sort of thing over and over and over:
     count = 0
@@ -13,6 +14,7 @@ I tend to do this sort of thing over and over and over:
 with variations for timed reporting, calculating processing rate, and so on.
 ProgressLogger really doesn't do much - it just tries to handle the interval checking, leaving what you do every
 million records (or whatever) entirely up to you.  The example above can be run as:
+    require 'progress-logger'
 
     p = ProgressLogger.new(:count => 1000000) do |state|
       puts "Processed #{state.count} rows"
