@@ -1,6 +1,36 @@
 = progress-logger
 
-Description goes here.
+This is a very simple gem to make it easier to log the state of long slow processing jobs.
+I tend to do this sort of thing over and over and over:
+    count = 0
+    @db.find_all.each do |record|
+      count += 1
+      if count % 1000000 == 0
+        puts "Processed #{count} rows"
+      end
+      # do stuff
+    end
+with variations for timed reporting, calculating processing rate, and so on.
+the ProgressLogger gem doesn't do much - it just tries to handle the interval checking, leaving what you do every
+million records (or whatever) entirely up to you.  The example above can be run as:
+
+    p = ProgressLogger.new(:count => 1000000) do |state|
+      puts "Processed #{state.count} rows"
+    end
+    @db.find_all.each do |record|
+      p.trigger
+      # do stuff
+    end
+
+You can do lots of other stuff too - see the ProgressLogger rdocs for more, but an example to whet your appetite:
+    p = ProgressLogger.new(:count => 1000000, :minutes => 30, :max => @db.size) do |state|
+      @db.flush()
+      @logger.info("Processed #{state.count} rows - #{state.long_eta/(60*60.0)} hours to go!")
+    end
+    @db.find_all.each do |record|
+      p.trigger
+      # do stuff
+    end
 
 == Note on Patches/Pull Requests
  

@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "progress-logger"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Simple gem for regular progress logging in a long-running loop}
+    gem.description = %Q{Simple gem for regular progress logging in a long-running loop}
     gem.email = "korny@sietsma.com"
     gem.homepage = "http://github.com/kornysietsma/progress-logger"
     gem.authors = ["Kornelis Sietsma"]
